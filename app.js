@@ -31,29 +31,27 @@ async function loadTasks() {
             const data = await response.json();
             const content = JSON.parse(atob(data.content));
             
-            // ВАЖНОЕ ИСПРАВЛЕНИЕ: убеждаемся что tasks - массив
             if (content && content.tasks && Array.isArray(content.tasks)) {
-                tasks = content.tasks;  // берём массив tasks из объекта
+                tasks = content.tasks;
             } else {
-                tasks = [];  // если структура неправильная - создаём пустой массив
+                tasks = [];
             }
             
             renderTasks();
             console.log('Задачи загружены:', tasks);
         } else {
             console.log('Ошибка загрузки:', response.status);
-            tasks = [];  // на случай ошибки тоже создаём пустой массив
+            tasks = [];
         }
     } catch (error) {
         console.log('Ошибка загрузки:', error);
-        tasks = [];  // на случай ошибки тоже создаём пустой массив
+        tasks = [];
     }
 }
 
 // Сохранение задач в GitHub
 async function saveTasksToGitHub() {
     try {
-        // Сначала получаем текущий SHA файла
         const getResponse = await fetch(
             `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
             {
@@ -70,12 +68,8 @@ async function saveTasksToGitHub() {
             sha = fileData.sha;
         }
 
-        // ВАЖНО: сохраняем как объект с полем tasks
-        const contentToSave = {
-            tasks: tasks  // сохраняем массив внутри объекта
-        };
+        const contentToSave = { tasks: tasks };
 
-        // Обновляем файл
         const updateResponse = await fetch(
             `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
             {
@@ -87,7 +81,7 @@ async function saveTasksToGitHub() {
                 },
                 body: JSON.stringify({
                     message: 'Update tasks: ' + new Date().toLocaleString(),
-                    content: btoa(JSON.stringify(contentToSave, null, 2)),  // сохраняем объект
+                    content: btoa(JSON.stringify(contentToSave, null, 2)),
                     sha: sha
                 })
             }
@@ -201,7 +195,7 @@ async function addComment(taskId, commentText, author) {
     }
 }
 
-// Остальные функции без изменений
+// Остальные функции
 function renderTasks() {
     const containers = {
         new: document.getElementById('newTasks'),
