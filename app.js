@@ -3,7 +3,7 @@ const GITHUB_CONFIG = {
     owner: 'poliana10007-cyber',
     repo: 'tasks-manager2', 
     path: 'tasks.json',
-    token: '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'
+    token: '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'
 };
 
 let tasks = [];
