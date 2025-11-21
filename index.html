@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💑 Задачи Ульяны и Сережи</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="task-manager">
+        <div class="container">
+            <div class="header">
+                <h1>💑 Задачи Ульяны и Сережи</h1>
+                <p>Ставьте задачи, комментируйте и следите за прогрессом</p>
+            </div>
+
+            <div class="task-form">
+                <input type="text" id="taskInput" placeholder="Напишите задачу..." maxlength="100">
+                <select id="assignTo">
+                    <option value="ulyana">Для Ульяны</option>
+                    <option value="sereja">Для Сережи</option>
+                </select>
+                <select id="difficulty">
+                    <option value="easy">🟢 Простая</option>
+                    <option value="medium">🟡 Средняя</option>
+                    <option value="hard">🔴 Сложная</option>
+                </select>
+                <button class="add-btn" onclick="addTask()">➕ Добавить задачу</button>
+            </div>
+
+            <div class="tasks-container">
+                <div class="status-column">
+                    <h3>📋 Новые задачи</h3>
+                    <div id="newTasks" class="tasks-list">
+                        <div class="empty-state">Здесь появятся новые задачи</div>
+                    </div>
+                </div>
+                
+                <div class="status-column">
+                    <h3>⏳ В работе</h3>
+                    <div id="inProgressTasks" class="tasks-list">
+                        <div class="empty-state">Задачи в процессе выполнения</div>
+                    </div>
+                </div>
+                
+                <div class="status-column">
+                    <h3>✅ Выполнено</h3>
+                    <div id="completedTasks" class="tasks-list">
+                        <div class="empty-state">Выполненные задачи</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
